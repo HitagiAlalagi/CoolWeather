@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
+    <!-- 底部菜单栏 -->
+
     <!-- 显示背景图片 -->
     <ImageView
         android:id="@+id/bing_pic_img"

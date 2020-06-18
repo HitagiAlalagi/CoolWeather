@@ -3,6 +3,7 @@
     package="com.coolweather.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="org.litepal.LitePalApplication"
@@ -18,7 +19,9 @@
             android:enabled="true"
             android:exported="true"></service>
 
-        <activity android:name=".WeatherActivity" />
+        <activity android:name=".WeatherActivity"/>
+        <activity android:name=".NewsActivity"/>
+        <activity android:name=".WebActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

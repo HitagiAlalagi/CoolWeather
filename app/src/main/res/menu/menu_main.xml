@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_google"
+        android:icon="@drawable/qmui_s_list_item_bg_1"
+        android:title="Google" />
+
+    <item
+        android:id="@+id/navigation_stackflow"
+        android:icon="@drawable/qmui_s_list_item_bg_1"
+        android:title="StackOverflow" />
+
+    <item
+        android:id="@+id/navigation_github"
+        android:icon="@drawable/qmui_s_list_item_bg_1"
+        android:title="Github" />
+</menu>
