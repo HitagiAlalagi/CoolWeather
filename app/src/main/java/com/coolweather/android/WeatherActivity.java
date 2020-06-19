@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -119,13 +120,6 @@ public class WeatherActivity extends AppCompatActivity {
             }
         });
 
-        String bingPic = prefs.getString("bing_pic",null);  //尝试从缓存中读取
-        if (bingPic != null){
-            Glide.with(this).load(bingPic).into(bingPicImg);
-        }else {
-            loadBingPic();  // 没有读取到则加载
-        }
-
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,7 +169,6 @@ public class WeatherActivity extends AppCompatActivity {
                 });
             }
         });
-        loadBingPic();
     }
 
     /**
@@ -194,6 +187,30 @@ public class WeatherActivity extends AppCompatActivity {
         titleUpdateTime.setText(updateTime);
         degreeText.setText(degree);
         weatherInfoText.setText(weatherInfo);
+
+
+        switch (weatherInfo){
+            case "晴":
+                bingPicImg.setImageResource(R.drawable.qing);break;
+            case "阴":
+                bingPicImg.setImageResource(R.drawable.yin);break;
+            case "多云":
+                bingPicImg.setImageResource(R.drawable.duoyun);break;
+            case "阵雨":
+                bingPicImg.setImageResource(R.drawable.zhenyu);break;
+            case "雷阵雨":
+                bingPicImg.setImageResource(R.drawable.leizhenyu);break;
+            case "小雨":
+                bingPicImg.setImageResource(R.drawable.xiaoyu);break;
+            case "中雨":
+                bingPicImg.setImageResource(R.drawable.zhongyu);break;
+            case "大雨":
+                bingPicImg.setImageResource(R.drawable.dayu);break;
+            default:
+                Log.d("tag",weatherInfo);break;
+        }
+
+
         forecastLayout.removeAllViews();
         for (Forecast forecast:weather.forecastList){   //循环处理每天的天气信息
             View view = LayoutInflater.from(this).inflate(R.layout.forecast_item,forecastLayout,false);
@@ -230,32 +247,5 @@ public class WeatherActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, AutoUpdateService.class);
         startService(intent);
-    }
-
-    /**
-     * 加载 必应 每日一图
-     */
-    private void loadBingPic(){
-        String requestBingPic = "http://guolin.tech/api/bing_pic";
-        HttpUtil.sendOkHttpRequest(requestBingPic, new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                final String bingPic = response.body().string();    // 获取背景图链接
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
-                editor.putString("bing_pic",bingPic);
-                editor.apply(); // 将背景图链接存到SharedPreferences中
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Glide.with(WeatherActivity.this).load(bingPic).into(bingPicImg);    // 用 Glide 加载图片
-                    }
-                });
-            }
-        });
     }
 }

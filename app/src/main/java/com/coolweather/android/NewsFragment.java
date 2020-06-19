@@ -42,11 +42,11 @@ public class NewsFragment extends Fragment {
     private static final int SELECT_REFLSH = 1;
 
     @SuppressLint("HandlerLeak")
-    private Handler newsHandler = new Handler(){
+    private final Handler newsHandler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
-            String uniquekey,title,date,category,author_name,url,thumbnail_pic_s,thumbnail_pic_s02,thumbnail_pic_s03;
-            switch (msg.what){
+            String uniquekey, title, date, category, author_name, url, thumbnail_pic_s, thumbnail_pic_s02, thumbnail_pic_s03;
+            switch (msg.what) {
                 case UPNEWS_INSERT:
                     list = ((News) msg.obj).getResult().getData();
                     MyTabAdapter adapter = new MyTabAdapter(list, getActivity());
@@ -54,7 +54,7 @@ public class NewsFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                     break;
                 case SELECT_REFLSH:
-                    list =((News) msg.obj).getResult().getData();
+                    list = ((News) msg.obj).getResult().getData();
                     MyTabAdapter myTabAdapter = new MyTabAdapter(list, getActivity());
                     listView.setAdapter(myTabAdapter);
                     myTabAdapter.notifyDataSetChanged();
