@@ -14,20 +14,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <service
-            android:name=".service.AutoUpdateService"
-            android:enabled="true"
-            android:exported="true"></service>
-
-        <activity android:name=".WeatherActivity"/>
-        <activity android:name=".NewsActivity"/>
-        <activity android:name=".WebActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity android:name=".RegisterActivity">
+
+        </activity>
+
+
+        <service
+            android:name=".service.AutoUpdateService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".WeatherActivity" />
+        <activity android:name=".NewsActivity" />
+        <activity android:name=".WebActivity" />
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 

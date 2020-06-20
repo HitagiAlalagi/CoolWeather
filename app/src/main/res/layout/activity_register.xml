@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome Register!"
+        android:textColor="#000"
+        android:layout_marginTop="70dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="30dp"></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="欢迎注册   天气管理系统"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="账号"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"></TextView>
+
+    <EditText
+        android:id="@+id/reg_user"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:singleLine="true"
+        android:maxLength="18"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:background="@null" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="50dp"
+        android:background="#E1DCDC"></View>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="密码"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"></TextView>
+
+
+
+    <EditText
+        android:id="@+id/reg_password"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:singleLine="true"
+        android:maxLength="18"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:background="@null"
+        android:inputType="textPassword" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="50dp"
+        android:background="#E1DCDC"></View>
+
+
+
+
+    <TextView
+        android:id="@+id/reg_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        android:textSize="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"></TextView>
+
+</LinearLayout>
