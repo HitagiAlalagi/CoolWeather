@@ -1,7 +1,9 @@
 package com.coolweather.android;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,11 +18,25 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
 import com.bumptech.glide.Glide;
 import com.coolweather.android.gson.Forecast;
 import com.coolweather.android.gson.Weather;
@@ -31,6 +47,8 @@ import com.coolweather.android.util.Utility;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -59,6 +77,8 @@ public class WeatherActivity extends AppCompatActivity {
     private Button navButton;
 
     private TextView locate_button;
+    public LocationClient mLocationClient;
+    private TextView locatee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +93,15 @@ public class WeatherActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);   //设置顶部透明
         }
 
+        mLocationClient=new LocationClient(getApplicationContext());
+        mLocationClient.registerLocationListener(new WeatherActivity.MyLocationListener());
+        SDKInitializer.initialize(getApplicationContext());
+
         setContentView(R.layout.activity_weather);
 
         //初始化各组件
         locate_button = findViewById(R.id.location_button);
+        locatee = findViewById(R.id.locate);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navButton = findViewById(R.id.nav_button);
@@ -138,6 +163,45 @@ public class WeatherActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        initLocation();
+        mLocationClient.start();
+    }
+
+    /*初始化定位函数*/
+    private void initLocation() {
+        LocationClientOption option = new LocationClientOption();
+        option.setScanSpan(5000);       ////设置发起定位请求的间隔时间为5000ms,设置发起定位请求的间隔需要大于等于1000ms才是有效的
+        option.setLocationMode(LocationClientOption.LocationMode.Device_Sensors);
+
+        option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
+        option.setOpenGps(true);//可选，默认false,设置是否使用gps
+        option.setLocationNotify(true);//可选，默认false，设置是否当gps有效时按照1S1次频率输出GPS结果
+        mLocationClient.setLocOption(option);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLocationClient.stop();
+    }
+
+    /*监听线程，获得当前的经纬度，并显示*/
+    private class MyLocationListener implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(final BDLocation bdLocation) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() { // GPS定位结果
+                    StringBuilder currentPosition=new StringBuilder();
+                    currentPosition.append("用户定位:");
+                    currentPosition.append("国家:").append(bdLocation.getCountry()).append(" ");
+                    currentPosition.append("省:").append(bdLocation.getProvince()).append(" ");
+                    currentPosition.append("市:").append(bdLocation.getCity()).append(" ");
+
+                    locatee.setText(currentPosition);
+                }
+            });
+        }
     }
 
     /**
