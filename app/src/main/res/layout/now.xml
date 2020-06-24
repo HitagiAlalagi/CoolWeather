@@ -5,16 +5,35 @@
     android:layout_height="wrap_content"
     android:layout_margin="15dp">
 
-    <!-- 显示当前城市 -->
-    <TextView
-        android:id="@+id/locate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:textSize="15dp"
-        android:textColor="@color/white"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <!-- 显示当前城市 -->
+        <Button
+            android:id="@+id/locatecity"
+            android:layout_width="55dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:textSize="15dp"
+            android:text="定位"
+            android:orientation="horizontal"
+            android:background="@drawable/shape"
+            android:textColor="@color/white"/>
+        <!-- 显示当前城市 -->
+        <TextView
+            android:id="@+id/locate"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:textSize="15dp"
+            android:orientation="horizontal"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
     <!-- 显示气温 -->
     <TextView
         android:id="@+id/degree_text"

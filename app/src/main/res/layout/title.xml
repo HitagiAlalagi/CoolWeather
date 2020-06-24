@@ -13,15 +13,15 @@
         android:layout_centerVertical="true"
         android:background="@drawable/ic_home"/>
 
-    <!-- 居右显示定位城市的图标 -->
+    <!-- 居左显示定位城市的图标 -->
     <TextView
-        android:layout_width="80dp"
+        android:layout_width="70dp"
         android:layout_height="40dp"
         android:id="@+id/location_button"
-        android:layout_marginLeft="90dp"
+        android:layout_marginLeft="70dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="25dp"
         android:text="地图"
         android:textSize="15dp"
         android:textColor="@color/white"
