@@ -73,6 +73,8 @@ public class WeatherActivity extends AppCompatActivity {
     public SwipeRefreshLayout swipeRefreshLayout;
     private String weatherId;
 
+    private TextView share_button;
+
     public DrawerLayout drawerLayout;
     private Button navButton;
 
@@ -101,7 +103,7 @@ public class WeatherActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_weather);
         //初始化各组件
-
+        share_button = findViewById(R.id.more_tv_share);
         locateCity = findViewById(R.id.locatecity);
         locate_button = findViewById(R.id.location_button);
         locatee = findViewById(R.id.locate);
@@ -156,6 +158,17 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        share_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT,"CoolWeather是一款超萌超可爱的天气预报软件");
+                intent.setType("text/plain");
+                startActivity(Intent.createChooser(intent,"选择分享应用"));
             }
         });
 

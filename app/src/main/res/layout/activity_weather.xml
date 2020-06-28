@@ -6,7 +6,13 @@
     android:background="@color/colorPrimary">
 
     <!-- 底部菜单栏 -->
+    <RelativeLayout
+        android:id="@+id/main_button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true">
 
+    </RelativeLayout>
     <!-- 显示背景图片 -->
     <ImageView
         android:id="@+id/bing_pic_img"
@@ -45,8 +51,8 @@
                     <include layout="@layout/now"/>
                     <include layout="@layout/forecast"/>
                     <include layout="@layout/aqi"/>
-
                     <include layout="@layout/suggestion" />
+                    <include layout="@layout/button"/>
 
                 </LinearLayout>
 
@@ -63,5 +69,6 @@
             android:layout_gravity="start"/>
 
     </androidx.drawerlayout.widget.DrawerLayout>
+
 
 </FrameLayout>
